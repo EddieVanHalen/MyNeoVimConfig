@@ -11,6 +11,10 @@ require("installing-lazy")
 require("keymaps")
 require("icons").setup()
 
+vim.api.nvim_create_user_command('LiveServer', function()
+  vim.fn.system("live-server")
+end, {desc = "Start Live Server"})
+
 vim.api.nvim_create_autocmd({ "VimEnter" }, {
   nested = true,
   callback = function()
