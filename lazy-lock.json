@@ -18,6 +18,5 @@
   "telescope.nvim": { "branch": "master", "commit": "a0bbec21143c7bc5f8bb02e0005fa0b982edc026" },
   "todo-comments.nvim": { "branch": "main", "commit": "ae0a2afb47cf7395dc400e5dc4e05274bf4fb9e0" },
   "toggleterm.nvim": { "branch": "main", "commit": "022ff5594acccc8d90d2e46dc43994f7722ebdf7" },
-  "tokyonight.nvim": { "branch": "main", "commit": "c2725eb6d086c8c9624456d734bd365194660017" },
   "ultimate-autopair.nvim": { "branch": "v0.6", "commit": "9e3209190c22953566ae4e6436ad2b4ff4dabb95" }
 }
