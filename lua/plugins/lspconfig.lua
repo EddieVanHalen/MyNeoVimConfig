@@ -52,6 +52,30 @@ return {
 			lspconfig.gdscript.setup({
 				capabilities = capabilities,
 			})
+
+			lspconfig.csharp_ls.setup({
+				capabilities = capabilities,
+			})
+
+			lspconfig.clangd.setup({
+				capabilities = capabilities,
+			})
+
+			lspconfig.html.setup({
+				capabilities = capabilities,
+			})
+
+			lspconfig.biome.setup({
+				capabilities = capabilities,
+			})
+
+			lspconfig.cssls.setup({
+				capabilities = capabilities,
+			})
+
+			lspconfig.ts_ls.setup({
+				capabilities = capabilities,
+			})
 		end,
 	},
 }
