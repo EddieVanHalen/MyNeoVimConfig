@@ -1,0 +1,5 @@
+{
+  "suggest.noselect": false,
+  "suggest.enablePreselect": true,
+  "coc.preferences.formatOnSaveFiletypes": ["javascript", "typescript", "json", "python", "cpp", "c"]
+}
