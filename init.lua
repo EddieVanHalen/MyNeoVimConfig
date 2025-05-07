@@ -6,9 +6,11 @@ vim.cmd('filetype plugin indent on')
 -- Установка плагинов через vim-plug
 vim.cmd [[
   call plug#begin('~/.config/nvim/plugged')
+  
 
-  Plug 'sheerun/vim-polyglot'
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'ayu-theme/ayu-vim'
+  Plug 'ajmwagar/vim-deus'
   Plug 'nvim-tree/nvim-tree.lua'
   Plug 'nvim-tree/nvim-web-devicons'         " Иконки для файлов
   Plug 'vim-airline/vim-airline'
@@ -20,9 +22,14 @@ vim.cmd [[
 
 -- Цветовая схема
 vim.o.termguicolors = true
-vim.cmd[[colorscheme ayu]]
+vim.cmd[[colorscheme deus]]
 
-
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = {"c_sharp", "javascript", "lua", "python", "cpp", "c", "rust"},
+  highlight = {
+    enable = true,  -- Включить подсветку синтаксиса
+  },
+}
 -- Настройки nvim-tree
 require("nvim-tree").setup({
   view = {
@@ -72,7 +79,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
 vim.g['airline#extensions#tabline#enabled'] = 1
 vim.g['airline_powerline_fonts'] = 1
 vim.g['airline_statusline_ontop'] = 0
-vim.g['airline_theme'] = 'ayu_dark'
+vim.g['airline_theme'] = 'deus'
 vim.g['airline#extensions#tabline#formatter'] = 'default'
 
 -- Настройки coc.nvim
