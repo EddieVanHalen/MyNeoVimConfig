@@ -7,6 +7,8 @@ vim.cmd('filetype plugin indent on')
 vim.cmd [[
   call plug#begin('~/.config/nvim/plugged')
 
+  Plug 'sheerun/vim-polyglot'
+  Plug 'ayu-theme/ayu-vim'
   Plug 'nvim-tree/nvim-tree.lua'
   Plug 'nvim-tree/nvim-web-devicons'         " Иконки для файлов
   Plug 'vim-airline/vim-airline'
@@ -18,6 +20,7 @@ vim.cmd [[
 
 -- Цветовая схема
 vim.o.termguicolors = true
+vim.cmd[[colorscheme ayu]]
 
 
 -- Настройки nvim-tree
