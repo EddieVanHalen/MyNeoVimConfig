@@ -2,6 +2,11 @@ vim.o.clipboard = 'unnamedplus'
 vim.o.ttyfast = true
 vim.o.scrolloff = 30
 vim.cmd('filetype plugin indent on')
+vim.o.expandtab = true      -- Превращать TAB в пробелы
+vim.o.shiftwidth = 4        -- Отступ при автоформатировании = 4 пробела
+vim.o.tabstop = 4           -- Визуальный размер TAB = 4 пробела
+vim.o.softtabstop = 4       -- Кол-во пробелов при нажатии TAB = 4
+vim.o.smarttab = true       -- TAB учитывает shiftwidth
 
 -- Установка плагинов через vim-plug
 vim.cmd [[
