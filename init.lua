@@ -7,7 +7,8 @@ vim.cmd('filetype plugin indent on')
 vim.cmd [[
   call plug#begin('~/.config/nvim/plugged')
   
-
+  Plug 'nvim-lua/plenary.nvim'               
+  Plug 'nvim-telescope/telescope.nvim'       
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'ayu-theme/ayu-vim'
   Plug 'ajmwagar/vim-deus'
@@ -30,6 +31,32 @@ require'nvim-treesitter.configs'.setup {
     enable = true,  -- Включить подсветку синтаксиса
   },
 }
+
+require('telescope').setup{
+  defaults = {
+    layout_strategy = 'horizontal',
+    layout_config = {
+      horizontal = {
+        prompt_position = "top",
+        preview_width = 0.55,
+        results_width = 0.8,
+      },
+      width = 0.87,
+      height = 0.80,
+      preview_cutoff = 120,
+    },
+    sorting_strategy = "ascending",
+    prompt_prefix = "🔍 ",
+    selection_caret = " ",
+  },
+  pickers = {
+    find_files = {
+      hidden = true
+    }
+  }
+}
+
+
 -- Настройки nvim-tree
 require("nvim-tree").setup({
   view = {
@@ -52,8 +79,19 @@ require("nvim-tree").setup({
   }
 })
 
--- Клавиша для открытия/закрытия дерева
---vim.keymap.set('n', '<leader>n', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
+
+-- <Space>ff — найти файл
+vim.keymap.set('n', '<Space>ff', ':Telescope find_files<CR>', { noremap = true, silent = true })
+
+-- <Space>fg — поиск по содержимому
+vim.keymap.set('n', '<Space>fg', ':Telescope live_grep<CR>', { noremap = true, silent = true })
+
+-- <Space>fb — открыть буферы
+vim.keymap.set('n', '<Space>fb', ':Telescope buffers<CR>', { noremap = true, silent = true })
+
+-- <Space>fh — поиск справки
+vim.keymap.set('n', '<Space>fh', ':Telescope help_tags<CR>', { noremap = true, silent = true })
+
 
 -- Открытие/закрытие nvim-tree с Space + n
 vim.keymap.set('n', '<Space>n', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
