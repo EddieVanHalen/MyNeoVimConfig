@@ -1,4 +1,5 @@
 vim.o.clipboard = 'unnamedplus'
+vim.g.mapleader = " "
 vim.o.ttyfast = true
 vim.o.scrolloff = 30
 vim.cmd('filetype plugin indent on')
@@ -28,6 +29,7 @@ vim.o.relativenumber = true
 vim.cmd [[
   call plug#begin('~/.config/nvim/plugged')
   
+  Plug 'elvessousa/sobrio'  
   Plug 'nvim-lua/plenary.nvim'               
   Plug 'nvim-telescope/telescope.nvim'       
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -44,7 +46,7 @@ vim.cmd [[
 
 -- Цветовая схема
 vim.o.termguicolors = true
-vim.cmd[[colorscheme deus]]
+vim.cmd[[colorscheme sobrio]]
 
 require'nvim-treesitter.configs'.setup {
   ensure_installed = {"c_sharp", "javascript", "lua", "python", "cpp", "c", "rust"},
@@ -140,7 +142,7 @@ vim.keymap.set('i', 'jk', '<Esc>', { noremap = true, silent = true })
 vim.g['airline#extensions#tabline#enabled'] = 1
 vim.g['airline_powerline_fonts'] = 1
 vim.g['airline_statusline_ontop'] = 0
-vim.g['airline_theme'] = 'deus'
+vim.g['airline_theme'] = 'ayu_dark'
 vim.g['airline#extensions#tabline#formatter'] = 'default'
 
 -- Настройки coc.nvim
@@ -152,7 +154,4 @@ vim.cmd [[
   " Enter — подтвердить выбор
   inoremap <silent><expr> <CR> pumvisible() ? coc#_select_confirm() : "\<CR>"
 ]]
-
--- Команда для обновления Coc Extensions можно вызывать вручную
--- :CocInstall coc-clangd coc-pyright coc-json и т.д.
 
