@@ -29,6 +29,7 @@ vim.o.relativenumber = true
 vim.cmd [[
   call plug#begin('~/.config/nvim/plugged')
   
+  Plug 'blazkowolf/gruber-darker.nvim'
   Plug 'elvessousa/sobrio'  
   Plug 'nvim-lua/plenary.nvim'               
   Plug 'nvim-telescope/telescope.nvim'       
@@ -39,14 +40,16 @@ vim.cmd [[
   Plug 'nvim-tree/nvim-web-devicons'         " Иконки для файлов
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'windwp/nvim-autopairs'
 
   call plug#end()
 ]]
 
+require("nvim-autopairs").setup()
+
 -- Цветовая схема
 vim.o.termguicolors = true
-vim.cmd[[colorscheme sobrio]]
+vim.cmd[[colorscheme gruber-darker]]
 
 require'nvim-treesitter.configs'.setup {
   ensure_installed = {"c_sharp", "javascript", "lua", "python", "cpp", "c", "rust"},
@@ -84,22 +87,25 @@ require('telescope').setup{
 require("nvim-tree").setup({
   view = {
     width = 30,
-    side = "left"
+    side = "left",
   },
   renderer = {
     icons = {
       show = {
-        file = true,
-        folder = true,
-        folder_arrow = true,
-        git = true,
+        file = false,
+        folder = false,
+        folder_arrow = false,
+        git = false,
       },
+    },
+    indent_markers = {
+      enable = true,
     },
   },
   filters = {
     dotfiles = false,
-    custom = { "^node_modules$", "^__pycache__$" }
-  }
+    custom = { "^node_modules$", "^__pycache__$" },
+  },
 })
 
 
@@ -144,14 +150,3 @@ vim.g['airline_powerline_fonts'] = 1
 vim.g['airline_statusline_ontop'] = 0
 vim.g['airline_theme'] = 'ayu_dark'
 vim.g['airline#extensions#tabline#formatter'] = 'default'
-
--- Настройки coc.nvim
-vim.cmd [[
-  " TAB для подтверждения автодополнения
-  inoremap <silent><expr> <TAB> pumvisible() ? coc#pum#confirm() : "\<Tab>"
-  " Shift-TAB — назад по списку
-  inoremap <silent><expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
-  " Enter — подтвердить выбор
-  inoremap <silent><expr> <CR> pumvisible() ? coc#_select_confirm() : "\<CR>"
-]]
-
