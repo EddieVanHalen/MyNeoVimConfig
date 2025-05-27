@@ -1,0 +1,13 @@
+{
+  "rust-analyzer": {
+    "cargo": {
+      "allFeatures": true
+    },
+    "check": {
+      "command": "clippy"
+    }
+  },
+  "suggest.noselect": false,
+  "suggest.enablePreselect": true,
+  "coc.preferences.formatOnSaveFiletypes": ["javascript", "typescript", "json", "python", "cpp", "c"]
+}
