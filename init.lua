@@ -29,6 +29,7 @@ vim.o.relativenumber = true
 vim.cmd [[
   call plug#begin('~/.config/nvim/plugged')
 
+  Plug 'rebelot/kanagawa.nvim'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'blazkowolf/gruber-darker.nvim'
   Plug 'elvessousa/sobrio'  
