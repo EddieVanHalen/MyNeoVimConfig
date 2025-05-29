@@ -8,6 +8,8 @@ vim.o.shiftwidth = 4        -- Отступ при автоформатиров�
 vim.o.tabstop = 4           -- Визуальный размер TAB = 4 пробела
 vim.o.softtabstop = 4       -- Кол-во пробелов при нажатии TAB = 4
 vim.o.smarttab = true       -- TAB учитывает shiftwidth
+vim.opt.cursorline = true
+vim.cmd [[highlight CursorLine guibg=#2e2e2e]]
 
 
 vim.api.nvim_create_autocmd({ "InsertEnter" }, {
@@ -53,7 +55,7 @@ require("nvim-autopairs").setup()
 
 -- Цветовая схема
 vim.o.termguicolors = true
-vim.cmd[[colorscheme gruber-darker]]
+vim.cmd[[colorscheme kanagawa-wave]]
 
 require'nvim-treesitter.configs'.setup {
   ensure_installed = {"c_sharp", "javascript", "lua", "python", "cpp", "c", "rust"},
