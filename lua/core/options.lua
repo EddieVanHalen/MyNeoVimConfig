@@ -25,26 +25,6 @@ vim.api.nvim_create_autocmd({ "InsertLeave" }, {
   end,
 })
 
-
-vim.api.nvim_create_autocmd("BufEnter", {
-  callback = function()
-    -- Если открыт пустой буфер без имени и nvim-tree активен
-    if vim.bo.filetype == "" and vim.fn.bufname() == "" then
-      local wins = vim.api.nvim_list_wins()
-      for _, win in ipairs(wins) do
-        local buf = vim.api.nvim_win_get_buf(win)
-        local ft = vim.bo[buf].filetype
-        if ft == "NvimTree" then
-          -- Закрываем пустой буфер
-          vim.api.nvim_buf_delete(0, { force = true })
-          return
-        end
-      end
-    end
-  end,
-})
-
--- Скрываем статуслайн, если вошли в окно с NvimTree
 vim.api.nvim_create_autocmd("WinEnter", {
   callback = function()
     local ft = vim.bo[vim.api.nvim_get_current_buf()].filetype
