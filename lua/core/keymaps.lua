@@ -14,6 +14,8 @@ vim.keymap.set('n', '<Space>fh', ':Telescope help_tags<CR>', { noremap = true, s
 -- Открытие/закрытие nvim-tree с Space + n
 vim.keymap.set('n', '<Space>n', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
 
+vim.api.nvim_set_keymap('n', '<C-n>', ':wincmd p<CR>', { noremap = true, silent = true })
+
 -- Автоматическое открытие дерева при запуске, если это директория
 vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()
