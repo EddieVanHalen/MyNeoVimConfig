@@ -13,6 +13,14 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+
+	{
+		"linrongbin16/lsp-progress.nvim",
+		config = function()
+			require("lsp-progress").setup()
+		end,
+	},
+
 	{ "nvim-lua/plenary.nvim" },
 	{ "nvim-telescope/telescope.nvim" },
 	{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },

@@ -1,3 +1,5 @@
+local lsp_progress = require("lsp-progress").progress
+
 require("lualine").setup({
 	options = {
 		theme = {
@@ -37,6 +39,7 @@ require("lualine").setup({
 			function()
 				return vim.bo.filetype == "NvimTree" and " " or "%f"
 			end,
+			lsp_progress, -- 👈 вот это добавляем
 		},
 		lualine_x = {
 			function()
