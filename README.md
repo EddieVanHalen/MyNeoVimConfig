@@ -4,7 +4,7 @@
 >
 >npm install -g typescript typescript-language-server
 >
->dotnet tool install --global csharp-ls
+>dotnet tool install --global csharp-ls --version 0.16.0
 
 ## Formatters
 
