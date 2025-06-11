@@ -45,6 +45,15 @@ lspconfig.rust_analyzer.setup({
 	},
 })
 
+-- Svelte
+
+lspconfig.svelte.setup({
+	capabilities = capabilities,
+	on_attach = function(client, bufnr)
+		client.server_capabilities.documentFormattingProvider = false
+	end,
+})
+
 -- TS/JS
 
 lspconfig.ts_ls.setup({
