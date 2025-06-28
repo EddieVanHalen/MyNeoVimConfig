@@ -11,8 +11,8 @@ vim.keymap.set("n", "<Space>fb", ":Telescope buffers<CR>", { noremap = true, sil
 vim.keymap.set("n", "<Space>fh", ":Telescope help_tags<CR>", { noremap = true, silent = true })
 
 -- Открытие/закрытие nvim-tree с Space + n
-vim.keymap.set("n", "<C-n>", "<cmd>NvimTreeToggle<CR>", { desc = "nvimtree toggle window" })
-vim.keymap.set("n", "<leader>w", "<cmd>NvimTreeFocus<CR>", { desc = "nvimtree focus window" })
+vim.keymap.set("n", "<C-n>", "<cmd>Neotree toggle<CR>", { desc = "nvimtree toggle window" })
+vim.keymap.set("n", "<leader>w", "<cmd>Neotree focus<CR>", { desc = "nvimtree focus window" })
 
 -- Автоматическое открытие дерева при запуске, если это директория
 vim.api.nvim_create_autocmd("VimEnter", {

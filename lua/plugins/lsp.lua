@@ -34,19 +34,18 @@ local lspconfig = require("lspconfig")
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 -- Rust
-lspconfig.rust_analyzer.setup({
-	cmd = { vim.fn.expand("~/.cargo/bin/rust-analyzer") },
-	capabilities = capabilities,
-	on_attach = on_attach,
-	settings = {
-		["rust-analyzer"] = {
-			checkOnSave = { command = "clippy" },
-		},
-	},
-})
+-- lspconfig.rust_analyzer.setup({
+-- 	cmd = { vim.fn.expand("/Users/atillaismayil/.rustup/toolchains/stable-aarch64-apple-darwin/bin/rust-analyzer") },
+-- 	capabilities = capabilities,
+-- 	on_attach = on_attach,
+-- 	settings = {
+-- 		["rust-analyzer"] = {
+-- 			checkOnSave = { command = "clippy" },
+-- 		},
+-- 	},
+-- })
 
 -- Svelte
-
 lspconfig.svelte.setup({
 	capabilities = capabilities,
 	on_attach = function(client, bufnr)
@@ -55,7 +54,6 @@ lspconfig.svelte.setup({
 })
 
 -- TS/JS
-
 lspconfig.ts_ls.setup({
 	capabilities = capabilities,
 	on_attach = function(client, bufnr)
@@ -64,18 +62,18 @@ lspconfig.ts_ls.setup({
 })
 
 -- C#
-lspconfig.csharp_ls.setup({
-	capabilities = capabilities,
-	on_attach = on_attach,
-	cmd = { vim.fn.expand("~/.dotnet/tools/csharp-ls") },
-})
+-- lspconfig.csharp_ls.setup({
+-- 	capabilities = capabilities,
+-- 	on_attach = on_attach,
+-- 	cmd = { vim.fn.expand("~/.dotnet/tools/csharp-ls") },
+-- })
 
 -- C/C++
-lspconfig.clangd.setup({
-	capabilities = capabilities,
-	on_attach = on_attach,
-	cmd = { "clangd" },
-})
+-- lspconfig.clangd.setup({
+-- 	capabilities = capabilities,
+-- 	on_attach = on_attach,
+-- 	cmd = { "clangd" },
+-- })
 
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(ev)
