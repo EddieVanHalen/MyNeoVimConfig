@@ -13,14 +13,21 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-    {
-    "nvim-neo-tree/neo-tree.nvim",
-    branch = "v3.x",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons", -- иконки (можно отключить)
-      "MunifTanjim/nui.nvim",
-  }},
+
+	{
+		"mason-org/mason.nvim",
+		opts = {},
+	},
+
+	{
+		"nvim-neo-tree/neo-tree.nvim",
+		branch = "v3.x",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-tree/nvim-web-devicons", -- иконки (можно отключить)
+			"MunifTanjim/nui.nvim",
+		},
+	},
 	{
 		"linrongbin16/lsp-progress.nvim",
 		config = function()
