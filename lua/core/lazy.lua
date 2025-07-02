@@ -13,12 +13,14 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-
-	{
-		"mason-org/mason.nvim",
-		opts = {},
-	},
-
+    {
+        "williamboman/mason-lspconfig.nvim",
+        opts = {},
+        dependencies = {
+            { "williamboman/mason.nvim", opts = {} },
+            "neovim/nvim-lspconfig",
+        },
+    },
 	{
 		"nvim-neo-tree/neo-tree.nvim",
 		branch = "v3.x",
@@ -61,7 +63,6 @@ require("lazy").setup({
 
 	-- LSP
 
-	{ "neovim/nvim-lspconfig" },
 	{ "hrsh7th/nvim-cmp" },
 	{ "hrsh7th/cmp-nvim-lsp" },
 	{ "L3MON4D3/LuaSnip" },

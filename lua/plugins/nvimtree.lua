@@ -1,31 +1,21 @@
 require("neo-tree").setup({
+	window = {
+		position = "left",
+		width = 30,
+	},
+
 	filesystem = {
 		filtered_items = {
-			visible = true, -- показывать скрытые файлы
-			hide_dotfiles = false,
-			hide_gitignored = false,
+			visible = true, -- Показывать скрытые файлы
+			hide_dotfiles = false, -- Не скрывать dot-файлы (начинающиеся с .)
+			hide_gitignored = false, -- Не скрывать игнорируемые Git'ом
 			hide_by_name = {
 				"node_modules",
 				"__pycache__",
 			},
 		},
 	},
-	window = {
-		position = "left",
-		width = 30,
-	},
-	renderers = {
-		directory = {
-			{ "indent" },
-			{ "icon" }, -- ✅ добавь это, чтобы иконки папок отображались
-			{ "name" },
-		},
-		file = {
-			{ "indent" },
-			{ "icon" }, -- ✅ и для файлов тоже
-			{ "name" },
-		},
-	},
+
 	default_component_configs = {
 		icon = {
 			folder_closed = "",
@@ -35,6 +25,19 @@ require("neo-tree").setup({
 		},
 		indent = {
 			with_markers = true,
+		},
+	},
+
+	renderers = {
+		directory = {
+			{ "indent" },
+			{ "icon" },
+			{ "name" },
+		},
+		file = {
+			{ "indent" },
+			{ "icon" },
+			{ "name" },
 		},
 	},
 })

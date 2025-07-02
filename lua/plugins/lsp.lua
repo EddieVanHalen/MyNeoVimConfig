@@ -1,93 +1,80 @@
--- local on_attach = function(client, bufnr)
--- 	local bufopts = { noremap = true, silent = true, buffer = bufnr }
---
--- 	-- Navigation
--- 	vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
--- 	--  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
--- 	vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
--- 	vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
---
--- 	-- Info
--- 	vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
--- 	vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, bufopts)
--- 	vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, bufopts)
---
--- 	-- Diagnostics
--- 	vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, bufopts)
--- 	vim.keymap.set("n", "]d", vim.diagnostic.goto_next, bufopts)
--- 	vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, bufopts)
--- 	vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, bufopts)
---
--- 	if client.server_capabilities.documentFormattingProvider then
--- 		vim.api.nvim_create_autocmd("BufWritePre", {
--- 			group = vim.api.nvim_create_augroup("LspFormatOnSave", { clear = false }),
--- 			buffer = bufnr,
--- 			callback = function()
--- 				vim.lsp.buf.format({ async = false })
--- 			end,
--- 		})
--- 	end
--- end
---
--- -- LSP config
--- local lspconfig = require("lspconfig")
--- local capabilities = require("cmp_nvim_lsp").default_capabilities()
---
--- -- Rust
--- -- lspconfig.rust_analyzer.setup({
--- -- 	cmd = { vim.fn.expand("/Users/atillaismayil/.rustup/toolchains/stable-aarch64-apple-darwin/bin/rust-analyzer") },
--- -- 	capabilities = capabilities,
--- -- 	on_attach = on_attach,
--- -- 	settings = {
--- -- 		["rust-analyzer"] = {
--- -- 			checkOnSave = { command = "clippy" },
--- -- 		},
--- -- 	},
--- -- })
---
--- -- Svelte
--- lspconfig.svelte.setup({
--- 	capabilities = capabilities,
--- 	on_attach = function(client, bufnr)
--- 		client.server_capabilities.documentFormattingProvider = false
--- 	end,
--- })
---
--- -- TS/JS
--- lspconfig.ts_ls.setup({
--- 	capabilities = capabilities,
--- 	on_attach = function(client, bufnr)
--- 		client.server_capabilities.documentFormattingProvider = false
--- 	end,
--- })
---
--- -- C#
--- -- lspconfig.csharp_ls.setup({
--- -- 	capabilities = capabilities,
--- -- 	on_attach = on_attach,
--- -- 	cmd = { vim.fn.expand("~/.dotnet/tools/csharp-ls") },
--- -- })
---
--- -- C/C++
--- -- lspconfig.clangd.setup({
--- -- 	capabilities = capabilities,
--- -- 	on_attach = on_attach,
--- -- 	cmd = { "clangd" },
--- -- })
---
--- vim.api.nvim_create_autocmd("LspAttach", {
--- 	callback = function(ev)
--- 		local opts = { buffer = ev.buf }
---
--- 		vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
--- 		vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
--- 		vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
--- 		vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
--- 		vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
--- 		vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
--- 		vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
--- 		vim.keymap.set("n", "<leader>f", function()
--- 			vim.lsp.buf.format({ async = true })
--- 		end, opts)
--- 	end,
--- })
+require("mason").setup()
+require("mason-lspconfig").setup({
+	ensure_installed = { "rust_analyzer", "svelte", "ts_ls", "omnisharp", "clangd" },
+	automatic_installation = true,
+})
+
+-- Общее on_attach
+local on_attach = function(client, bufnr)
+	local bufopts = { noremap = true, silent = true, buffer = bufnr }
+
+	-- Навигация
+	vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
+	vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
+	vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
+
+	-- Инфо
+	vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
+	vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, bufopts)
+	vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, bufopts)
+
+	-- Диагностика
+	vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, bufopts)
+	vim.keymap.set("n", "]d", vim.diagnostic.goto_next, bufopts)
+	vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, bufopts)
+	vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, bufopts)
+
+	-- Форматирование при сохранении, если поддерживается сервером
+	if client.server_capabilities.documentFormattingProvider then
+		vim.api.nvim_create_autocmd("BufWritePre", {
+			group = vim.api.nvim_create_augroup("LspFormatOnSave", { clear = false }),
+			buffer = bufnr,
+			callback = function()
+				vim.lsp.buf.format({ async = false })
+			end,
+		})
+	end
+end
+
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+-- Common Setup For All Lsps
+local common_setup = {
+	capabilities = capabilities,
+	on_attach = on_attach,
+}
+
+-- svelte without formatting
+require("lspconfig").svelte.setup(vim.tbl_extend("force", common_setup, {
+	on_attach = function(client, bufnr)
+		client.server_capabilities.documentFormattingProvider = false
+	end,
+}))
+
+-- ts_ls without formatting
+require("lspconfig").ts_ls.setup(vim.tbl_extend("force", common_setup, {
+	on_attach = function(client, bufnr)
+		client.server_capabilities.documentFormattingProvider = false
+	end,
+}))
+
+-- rust_analyzer with settings
+require("lspconfig").rust_analyzer.setup(vim.tbl_extend("force", common_setup, {
+	settings = {
+		["rust-analyzer"] = {
+			checkOnSave = { command = "clippy" },
+		},
+	},
+}))
+
+-- clangd with cmd
+require("lspconfig").clangd.setup(vim.tbl_extend("force", common_setup, {
+	cmd = { "clangd" },
+}))
+
+-- omnisharp
+require("lspconfig").omnisharp.setup({
+	on_attach = on_attach,
+	capabilities = capabilities,
+	cmd = { "omnisharp" },
+})
