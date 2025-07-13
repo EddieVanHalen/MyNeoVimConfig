@@ -13,14 +13,14 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-    {
-        "williamboman/mason-lspconfig.nvim",
-        opts = {},
-        dependencies = {
-            { "williamboman/mason.nvim", opts = {} },
-            "neovim/nvim-lspconfig",
-        },
-    },
+	-- {
+	--     "williamboman/mason-lspconfig.nvim",
+	--     opts = {},
+	--     dependencies = {
+	--         { "williamboman/mason.nvim", opts = {} },
+	--         "neovim/nvim-lspconfig",
+	--     },
+	-- },
 	{
 		"nvim-neo-tree/neo-tree.nvim",
 		branch = "v3.x",
@@ -51,7 +51,6 @@ require("lazy").setup({
 	{ "blazkowolf/gruber-darker.nvim" },
 	{ "catppuccin/nvim", name = "catppuccin" },
 	{ "folke/tokyonight.nvim" },
-	{ "ellisonleao/gruvbox.nvim" },
 	{ "rose-pine/neovim" },
 	{ "navarasu/onedark.nvim" },
 
