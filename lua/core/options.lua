@@ -15,18 +15,7 @@ vim.o.termguicolors = true
 
 vim.wo.relativenumber = true
 
--- vim.api.nvim_create_autocmd({ "InsertEnter" }, {
---   callback = function()
---     vim.wo.relativenumber = false
---   end,
--- })
---
--- vim.api.nvim_create_autocmd({ "InsertLeave" }, {
---   callback = function()
---     vim.wo.relativenumber = true
---   end,
--- })
-
+-- Dynamic statusline visibility for NvimTree
 vim.api.nvim_create_autocmd("WinEnter", {
 	callback = function()
 		local ft = vim.bo[vim.api.nvim_get_current_buf()].filetype
@@ -40,3 +29,29 @@ vim.api.nvim_create_autocmd("WinEnter", {
 
 vim.o.number = true
 vim.o.relativenumber = true
+
+-- ✨ Highlight yanked text for instant feedback
+vim.api.nvim_create_autocmd("TextYankPost", {
+	callback = function()
+		vim.highlight.on_yank { higroup = "IncSearch", timeout = 200 }
+	end,
+})
+
+-- 🌙 Dim inactive windows for focus
+vim.api.nvim_create_autocmd({ "WinEnter", "WinLeave" }, {
+	callback = function(args)
+		if vim.api.nvim_get_current_win() == args.win then
+			vim.wo.winblend = 0
+		else
+			vim.wo.winblend = 20
+		end
+	end,
+})
+
+-- 🕒 Show time in the command area every minute
+vim.api.nvim_create_autocmd("CursorHold", {
+	pattern = "*",
+	callback = function()
+		vim.api.nvim_echo({ { "🕒 " .. os.date("%H:%M"), "Comment" } }, false, {})
+	end,
+})

@@ -13,14 +13,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-	-- {
-	--     "williamboman/mason-lspconfig.nvim",
-	--     opts = {},
-	--     dependencies = {
-	--         { "williamboman/mason.nvim", opts = {} },
-	--         "neovim/nvim-lspconfig",
-	--     },
-	-- },
 	{
 		"nvim-neo-tree/neo-tree.nvim",
 		branch = "v3.x",
@@ -53,6 +45,12 @@ require("lazy").setup({
 	{ "folke/tokyonight.nvim" },
 	{ "rose-pine/neovim" },
 	{ "navarasu/onedark.nvim" },
+	{ "EdenEast/nightfox.nvim" },           -- Nightfox, Nordfox, etc.
+	{ "shaunsingh/nord.nvim" },             -- Nord
+	{ "sainnhe/everforest" },               -- Everforest
+	{ "projekt0n/github-nvim-theme" },      -- GitHub themes
+	{ "olimorris/onedarkpro.nvim" },        -- Onedark Pro
+	{ "nyoom-engineering/oxocarbon.nvim" }, -- Oxocarbon
 
 	-- FORMATTER
 	{

@@ -6,7 +6,6 @@ require("conform").setup({
 		typescriptreact = { "prettier" },
 		rust = { "rustfmt" },
 		csharp = { "csharpier" },
-		python = { "black" },
 		c = { "clang-format" },
 		cpp = { "clang-format" },
 	},
